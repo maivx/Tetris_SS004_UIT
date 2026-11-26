@@ -5,7 +5,7 @@
 
 using namespace std;
 #define H 20
-#define W 15
+#define W 1
 char board[H][W] = {};
 
 int x, y, b;
