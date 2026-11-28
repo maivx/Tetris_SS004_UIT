@@ -109,27 +109,6 @@ void initBoard(){
             else board[i][j] = ' ';
 }
 
-void removeLine(){
-    int i = H - 2;
-    while (i >= 1){
-        bool full = true;
-        for (int j = 1; j < W - 1; j++)
-            if (board[i][j] == ' '){
-                full = false;
-                break;
-            }
-
-        if (full){
-            for (int k = i; k > 1; k--)
-                for (int j = 1; j < W - 1; j++)
-                    board[k][j] = board[k-1][j];
-
-            for (int j = 1; j < W - 1; j++)
-                board[1][j] = ' ';
-        }
-        else i--;
-    }
-}
 
 void draw(){
     system("cls");
