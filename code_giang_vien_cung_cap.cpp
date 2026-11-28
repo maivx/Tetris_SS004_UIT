@@ -1,5 +1,7 @@
 #include <iostream>
 #include <conio.h>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 #define H 20
@@ -73,6 +75,7 @@ char blocks[][4][4] ={
          {'L','L','L',' '},
          {' ',' ',' ',' '}}
 };
+
 bool canMove(int dx, int dy){
     for (int i = 0; i < 4; i++ )
         for (int j = 0; j < 4; j++ )
@@ -84,24 +87,50 @@ bool canMove(int dx, int dy){
             }
     return true;
 }
+
 void block2Board(){
     for (int i = 0; i < 4; i++ )
         for (int j = 0; j < 4; j++ )
             if (blocks[b][i][j] != ' ')
                 board[y+i][x+j] = blocks[b][i][j];
 }
+
 void boardDelBlock(){
     for (int i = 0; i < 4; i++ )
         for (int j = 0; j < 4; j++ )
             if (blocks[b][i][j] != ' ')
                 board[y+i][x+j] = ' ';
 }
+
 void initBoard(){
     for (int i = 0 ; i < H ; i++)
         for (int j = 0 ; j < W ; j++)
             if (i == 0 || i == H-1 || j ==0 || j == W-1) board[i][j] = '#';
             else board[i][j] = ' ';
 }
+
+void removeLine(){
+    int i = H - 2;
+    while (i >= 1){
+        bool full = true;
+        for (int j = 1; j < W - 1; j++)
+            if (board[i][j] == ' '){
+                full = false;
+                break;
+            }
+
+        if (full){
+            for (int k = i; k > 1; k--)
+                for (int j = 1; j < W - 1; j++)
+                    board[k][j] = board[k-1][j];
+
+            for (int j = 1; j < W - 1; j++)
+                board[1][j] = ' ';
+        }
+        else i--;
+    }
+}
+
 void draw(){
     system("cls");
 
